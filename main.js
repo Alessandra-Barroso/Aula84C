@@ -1,65 +1,101 @@
-canvas = document.getElementById("myCanvas");
+canvas = document.getElementById('myCanvas');
 ctx = canvas.getContext("2d");
-roverWidth = 100;
-roverHeigth = 90;
-backgroundImage = "mars.jpg";
-roverImage = "rover.png";
-roverX = 10;
-roverY = 10;
+
+rover_width = 100;
+rover_height = 90;
+
+background_image = "mars.jpg";
+
+rover_image = "rover.png";
+
+rover_x = 10;
+rover_y = 10;
 
 function add() {
-backgroundImgTag = new Image();
-backgroundImgTag.onload = uploadBackground;
-backgroundImgTag.src = backgroundImage;
+	background_imgTag = new Image(); //defining a variable with a new image
+	background_imgTag.onload = uploadBackground; // setting a function, onloading this variable
+	background_imgTag.src = background_image;   // load image
 
-roverImgTag = new Image();
-roverImgTag.onload = uploadRover;
-roverImgTag.src = roverImage;
+	rover_imgTag = new Image(); //defining a variable with a new image
+	rover_imgTag.onload = uploadrover; // setting a function, onloading this variable
+	rover_imgTag.src = rover_image;   // load image
 }
 
 function uploadBackground() {
-ctx.drawImage(backgroundImgTag, 0, 0, canvas.width, canvas.heigth);
+	ctx.drawImage(background_imgTag, 0, 0, canvas.width, canvas.height);
 }
 
-function uploadRover() {
-    ctx.drawImage(roverImgTag, roverX, roverY, roverWidth, roverHeigth);
-    }
+function uploadrover() {
+	ctx.drawImage(rover_imgTag, rover_x, rover_y, rover_width, rover_height);
+}
 
-window.addEventListener("keydown", myKeyDown);
 
-function myKeyDown(e)
-    {
-keyPressed = e.keyCode;
-console.log(keyPressed);
+window.addEventListener("keydown", my_keydown);
 
-if(keyPressed == "38")
+function my_keydown(e)
 {
-up();
-console.log("cima")
+	keyPressed = e.keyCode;
+	console.log(keyPressed);
+		if(keyPressed == '38')
+		{
+			up();
+			console.log("up");
+		}
+		if(keyPressed == '40')
+		{
+			down();
+			console.log("down");
+		}
+		if(keyPressed == '37')
+		{
+			left();
+			console.log("left");
+		}
+		if(keyPressed == '39')
+		{
+			right();
+			console.log("right");
+		}
 }
 
-if(keyPressed == "39")
+function up()
 {
-right();
-console.log("direita")
+	if(rover_y >=0)
+	{
+		rover_y = rover_y - 10;
+		console.log("When up arrow is pressed,  x = " + rover_x + " | y = " +rover_y);
+		 uploadBackground();
+		 uploadrover();
+	}
 }
-
-if(keyPressed == "40")
+function down()
 {
-down();
-console.log("baixo")
+	if(rover_y <=500)
+	{
+		rover_y =rover_y+ 10;
+		console.log("When down arrow is pressed,  x = " + rover_x + " | y = " +rover_y);
+		uploadBackground();
+		 uploadrover();
+	}
 }
-
-if(keyPressed == "37")
+function left()
 {
-
-left();
-console.log("esquerda")
+	if(rover_x >= 0)
+	{
+		rover_x =rover_x - 10;
+		console.log("When left arrow is pressed,  x = " + rover_x + " | y = " +rover_y);
+		uploadBackground();
+		 uploadrover();
+	}
 }
-
-}  
-
-function up() { if(roverY >=0) { roverY = roverY - 10; console.log("Quando direcional cima for pressionada, x = " + roverX + " | y = " +roverY); uploadBackground(); uploadrover(); } }
- function down() { if(roverY <=500) { roverY =roverY+ 10; console.log("Quando direcional baixo for pressionada, x = " + roverX + " | y = " +roverY); uploadBackground(); uploadrover(); } } 
- function left() { if(roverX >= 0) { roverX =roverX - 10; console.log("Quando direcional esquerda for pressionada, x = " + roverX + " | y = " +roverY); uploadBackground(); uploadrover(); } } 
- function right() { if(roverX <= 700) { roverX =roverX + 10; console.log("Quando direcional direita for pressionada, x = " + roverX + " | y = " +roverY); uploadBackground(); uploadrover(); } }
+function right()
+{
+	if(rover_x <= 700)
+	{
+		rover_x =rover_x + 10;
+		console.log("When right arrow is pressed,  x = " + rover_x + " | y = " +rover_y);
+		uploadBackground();
+		uploadrover();
+   }
+}
+	
